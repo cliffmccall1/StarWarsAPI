@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
-import { Card, CardHeader, CardContent, List, ListItem  } from '@material-ui/core';
-
+import React, { Component } from 'react';
+import { Card, List } from 'semantic-ui-react';
 
 export default class PeopleList extends Component {
     render() {
@@ -11,20 +10,20 @@ export default class PeopleList extends Component {
                     people.map((p) => {
                         return (
                             <Card 
-                                style={{width:275, display: "inline-block", verticalAlign: "top"}} 
+                                style={{width:275, display: "inline-block", padding: '10px'}} 
                                 variant="outlined"  
                                 key={p.url}
                             >
-                                <CardHeader title={p.name} />
-                                <CardContent>
-                                    <List>
-                                        <ListItem>Birth Year: {p.birth_year}</ListItem>
-                                        <ListItem>Gender: {p.gender}</ListItem>
-                                        <ListItem>Mass: {p.mass}</ListItem>
-                                        <ListItem>Height: {p.height}</ListItem>
-                                        <ListItem>Hair Color: {p.hair_color}</ListItem>
-                                    </List>
-                                </CardContent>
+                                <Card.Content>
+                                    <Card.Header>{p.name}</Card.Header>
+                                    <Card.Meta>Birth Year: {p.birth_year}</Card.Meta>
+                                    <Card.Description>
+                                        <List.Item>Gender: {p.gender}</List.Item>
+                                        <List.Item>Mass: {p.mass}</List.Item>
+                                        <List.Item>Height: {p.height}</List.Item>
+                                        <List.Item>Hair Color: {p.hair_color}</List.Item>
+                                    </Card.Description>
+                                </Card.Content>
                             </Card>
                         )
                     })

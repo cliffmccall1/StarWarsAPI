@@ -1,7 +1,9 @@
-import React, { Component } from 'react'
-import Axios from 'axios'
-import PeopleList from './components/PeopleList'
-import Container from '@material-ui/core/Container';
+import React, { Component } from 'react';
+import Axios from 'axios';
+import PeopleList from './components/PeopleList';
+import { Button, Form, Card } from 'semantic-ui-react';
+import Background from './assets/images/star-wars-logo.jpg';
+
 
 export default class App extends Component {
   constructor(props) {
@@ -25,26 +27,40 @@ export default class App extends Component {
     this.setState({count: event.target.value});
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
+  onClick() {
+    this.setState({count: ''});
   }
 
-  componentDidMount() {
+  handleSubmit(event) {
+    event.preventDefault();
     this.getPeople();
   }
 
   render() {
     const {people} = this.state;
     return (
-      <Container style={{ margin: 'auto', backgroundColor: 'gray', height: '100vh' }} className="App">
-        <h1>Star Wars People Finder</h1>
-        <p>Enter Number Between 1 - 10</p>
-        <form onSubmit={this.handleSubmit}>
-          <input type="number" value={this.state.count} onChange={this.handleChange}></input>
-          <button type="submit" value="Submit">Submit</button>
-        </form>
+      <div style={{ 
+        backgroundImage: `url(${Background})`,
+        backgroundSize: 'contain',
+        height: '100vh' }} 
+        className="App"
+      >
+        <Card style={{ margin: 'auto' }}>
+        <Form style={{ maxWidth: 275, padding: 10, margin: 'auto'}} onSubmit={this.handleSubmit}>
+          <Form.Field>
+          <h1>Star Wars API</h1>
+            <label>Enter Number Between 1 - 10</label>
+            <input 
+              type="text" 
+              value={this.state.count} 
+              onChange={this.handleChange}
+            />
+          </Form.Field>
+          <Button type="submit" value="Submit">Submit</Button>
+        </Form>
+        </Card>
         <PeopleList people={people} count={this.state.count}/>
-      </Container>
+      </div>
     )
   }
 }
