@@ -14,6 +14,8 @@ export default class App extends Component {
       }
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.clearSearch = this.clearSearch.bind(this);
+
     }
 
   async getPeople() {
@@ -27,8 +29,9 @@ export default class App extends Component {
     this.setState({count: event.target.value});
   }
 
-  onClick() {
-    this.setState({count: ''});
+  clearSearch(event) {
+    event.preventDefault();
+    this.setState({count: 0});
   }
 
   handleSubmit(event) {
@@ -49,14 +52,15 @@ export default class App extends Component {
         <Form style={{ maxWidth: 275, padding: 10, margin: 'auto'}} onSubmit={this.handleSubmit}>
           <Form.Field>
           <h1>Star Wars API</h1>
-            <label>Enter Number Between 1 - 10</label>
+            <label>Enter A Number Between 1 - 10</label>
             <input 
               type="text" 
               value={this.state.count} 
               onChange={this.handleChange}
             />
           </Form.Field>
-          <Button type="submit" value="Submit">Submit</Button>
+          <Button color='yellow' type="submit" value="Submit">Submit</Button>
+          <Button color='black' onClick={this.clearSearch}>Clear Search</Button>
         </Form>
         </Card>
         <PeopleList people={people} count={this.state.count}/>
